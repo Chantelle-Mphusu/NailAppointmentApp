@@ -131,7 +131,18 @@ const Appointmentform = ({ selectedService }) => {
               value={appointmentDetails.Datetime}
               onChange={HandleDateChange}
               renderInput={(params) => <TextField fullWidth  margin="normal"  sx={{ zIndex: 1500, position: 'relative'  }} {...params} />}
-              disablePortal
+              disablePortal={false} // Ensure portal usage is disabled if previously attempted
+              PopperProps={{
+                modifiers: [
+                  {
+                    name: 'preventOverflow',
+                    options: {
+                      boundary: 'viewport', // Use 'viewport' to keep it within the screen bounds
+                    },
+                  },
+                ],
+                container: document.body, // This forces the dropdown to render at the end of the document
+              }}
             />
           </LocalizationProvider>
           
