@@ -131,6 +131,7 @@ const Appointmentform = ({ selectedService }) => {
               value={appointmentDetails.Datetime}
               onChange={HandleDateChange}
               renderInput={(params) => <TextField fullWidth  margin="normal"  sx={{ zIndex: 1500, position: 'relative'  }} {...params} />}
+              disablePortal
             />
           </LocalizationProvider>
           
