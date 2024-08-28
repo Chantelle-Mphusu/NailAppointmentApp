@@ -26,9 +26,6 @@ app.use(
 );
 
 
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
 
 app.use(bodyParser.json());
 
@@ -38,9 +35,19 @@ app.use(cookieParser());
 app.use(express.json());
 
 
- 
+ // Serve static files from the React frontend
+ if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+  });
+}
 
  app.use("/", Route);
 
+ app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
 
 
