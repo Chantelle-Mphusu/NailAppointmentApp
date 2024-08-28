@@ -12,6 +12,8 @@ import axios from 'axios'
 
 const Appointmentform = ({ selectedService }) => {
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const navigate = useNavigate()
 
   const [appointmentDetails, setAppointmentDetails] = useState({
@@ -43,7 +45,7 @@ const Appointmentform = ({ selectedService }) => {
   const HandleSubmit = async (e) => {
     e.preventDefault();
     try{
-      const response = await axios.post("http://localhost:5000/Appoint", appointmentDetails)
+      const response = await axios.post(`${API_URL}/Appoint`, appointmentDetails)
       console.log('Response', response.data);
       toast.success('Appointment booked successfully!', { position: "top-left" });
       setTimeout(() => {
