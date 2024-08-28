@@ -64,9 +64,7 @@ const Appointmentform = ({ selectedService }) => {
 
 
   return (
-    <Container maxWidth="sm" sx={{  overflow: 'auto', // Allows scrolling
-      maxHeight: '100vh', // Ensures it doesn't extend beyond viewport height
-      padding: 2}}>
+    <Container maxWidth="sm">
       <ToastContainer/>
       <Box mt={4}>
       <Typography variant="h6" gutterBottom>
@@ -132,7 +130,7 @@ const Appointmentform = ({ selectedService }) => {
               label="Appointment Date & Time"
               value={appointmentDetails.Datetime}
               onChange={HandleDateChange}
-              renderInput={(params) => <TextField fullWidth  margin="normal"  sx={{ zIndex: 1000 }} {...params} />}
+              renderInput={(params) => <TextField fullWidth  margin="normal"  sx={{ zIndex: '1000', overflow: 'none' }} {...params} />}
             />
           </LocalizationProvider>
           
