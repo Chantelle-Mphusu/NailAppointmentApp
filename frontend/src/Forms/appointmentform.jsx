@@ -45,7 +45,7 @@ const Appointmentform = ({ selectedService }) => {
   const HandleSubmit = async (e) => {
     e.preventDefault();
     try{
-      const response = await axios.post(`${API_URL}/Appoint`, appointmentDetails)
+      const response = await axios.post(`${API_URL}Appoint`, appointmentDetails)
       console.log('Response', response.data);
       toast.success('Appointment booked successfully!', { position: "top-left" });
       setTimeout(() => {
