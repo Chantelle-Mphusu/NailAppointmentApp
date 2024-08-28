@@ -35,14 +35,12 @@ app.use(cookieParser());
 app.use(express.json());
 
 
- // Serve static files from the React frontend
- if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'frontend/build')));
+// Serve static files from the React frontend
+app.use(express.static(path.join(__dirname, "../frontend/build"))); // Adjust path if needed
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
-  });
-}
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build", "index.html")); // Adjust path if needed
+});
 
  app.use("/", Route);
 
