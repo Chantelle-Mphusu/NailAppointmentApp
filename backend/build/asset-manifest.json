@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2129f401.css",
+    "main.js": "/static/js/main.9e2e7e16.js",
+    "static/media/nailsback.png": "/static/media/nailsback.0aad83229625b8bbf1bb.png",
+    "static/media/glazenail.png": "/static/media/glazenail.6086958e7431deba564e.png",
+    "static/media/glazelogo.png": "/static/media/glazelogo.5e5abd3cb3f26e4282d7.png",
+    "index.html": "/index.html",
+    "main.2129f401.css.map": "/static/css/main.2129f401.css.map",
+    "main.9e2e7e16.js.map": "/static/js/main.9e2e7e16.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2129f401.css",
+    "static/js/main.9e2e7e16.js"
+  ]
+}
