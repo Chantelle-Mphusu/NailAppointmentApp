@@ -64,7 +64,7 @@ const Appointmentform = ({ selectedService }) => {
 
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" sx={{ overflow: 'visible' }}>
       <ToastContainer/>
       <Box mt={4}>
       <Typography variant="h6" gutterBottom>
