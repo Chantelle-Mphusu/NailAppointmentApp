@@ -1,8 +1,22 @@
 import React from 'react'
+import Navigation from './Navigation';
+import Footer from './Footer';
+import { Box, Container, Typography } from '@mui/material';
 
 const About = () => {
   return (
-    <div>About</div>
+    <>
+    <Box>
+
+          <Navigation />
+    </Box>
+    <Container sx={{ textAlign: 'center', mt: 8 , height:'65vh'}}>
+      <Typography>
+        Under construction
+      </Typography>
+    </Container>
+    <Footer/>
+    </>
   )
 }
 

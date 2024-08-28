@@ -1,70 +1,47 @@
-import React,{useEffect} from 'react'
-import glaze from '../images/glaze.png'
-import glazenail from '../images/glazenail.png'
-import nail1 from '../images/nail1.jpg'
-import nail2 from '../images/nail2.jpg'
-import nail8 from '../images/nail8.jpg'
-import nail5 from '../images/nail5.jpg'
-import nail3 from '../images/nail3.jpg'
-import nail7 from '../images/nail7.jpg'
-import Navigation from './Navigation'
-import Footer from './Footer'
+import React from 'react';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import glazenail from '../images/glazenail.png';
+import Navigation from './Navigation';
+import nailsback from '../images/nailsback.png';
+import Footer from './Footer';
+
 
 const Home = () => {
-
-  useEffect(() => {
-    const imageContainers = document.querySelectorAll('.image-container');
-    
-    imageContainers.forEach(container => {
-      const images = container.querySelectorAll('.nails');
-      let currentIndex = 0;
-
-      function changeImage() {
-        images[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % images.length;
-        images[currentIndex].classList.add('active');
-      }
-
-      const interval = setInterval(changeImage, 3000);
-      return () => clearInterval(interval); // Cleanup interval on component unmount
-    });
-  }, []);
-
   return (
     <>
-    <div className='bodycontainer1'>
-        <Navigation/>
-    </div>
+      <Box sx={{ backgroundColor: 'white' }}>
+        <Navigation />
+      </Box>
 
-    <div className='homeimg'>
-      <br></br>
-    <div className='bodycontainer2'>
-      {/* <div className='circlegrid1 image-container'>
-      <img className="nails active"src={nail1} width='240' length='240'  alt="logo"/>
-      <img className="nails"src={nail8} width='270' length='270'  alt="logo"/>
-      <img className="nails"src={nail5} width='240' length='240'  alt="logo"/>
-      </div> */}
-      <div className='circlegrid2'>
-        <p>Welcome</p>
-        <img className="glazelogo"src={glazenail}alt="logo"/>
-      </div>
-      {/* <div className='circlegrid3 image-container'>
-      <img className="nails"src={nail2} width='240' length='240'  alt="logo"/>
-      <img className="nails"src={nail3} width='240' length='240'  alt="logo"/>
-      <img className="nails"src={nail7} width='240' length='240'  alt="logo"/>
-      </div> */}
-        
-    </div>
-
-   <div className='book'>
-      <a href='/Appointment'><button>Book Appointment</button></a>
-   </div>
+      <Box sx={{ backgroundImage: `url(${nailsback})`, backgroundSize: 'contain', backgroundPosition: 'center ',  height: '100vh'}}>
         <br></br>
-   </div>
-   <br></br> <br></br>
-    <Footer/>
-    </>
-  )
-}
+        <Container sx={{
+          width:'680px',
+          backgroundColor: 'rgba(255, 255, 255, 0.8)', 
+          padding: '2rem',
+          marginTop: '20px',
+          borderRadius: '8px', // Optional for rounded corners
+        }} >
+          <Stack alignItems="center" spacing={4}>
+            <Typography variant="h3" fontFamily="'Dancing Script', cursive" align="center">
+              Welcome
+            </Typography>
+            <Avatar src={glazenail} alt="logo" sx={{ width: 240, height: 240, border: '2px solid black' }} />
+            <Button variant="outlined" href="/Appointment" sx={{marginTop: '1rem', width: { xs: '80%', sm: '40%', md: '30%' } }}>
+              Book Appointment
+            </Button>
+          </Stack>
+        </Container>
+      </Box>
 
-export default Home
+      <Footer />
+    </>
+  );
+};
+
+export default Home;

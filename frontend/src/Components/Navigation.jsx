@@ -1,26 +1,27 @@
-import React from 'react'
-import  Container  from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import React from 'react';
+import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 
 const Navigation = () => {
   return (
-    <>
-    <div className='homecontainer'>
-         <ul>
-         <li className="leftlogo"> Glaze Nail Bar</li>
-
-            <li> <a href="/Appointment">Appoint</a></li>
-
-            <li><a href="/About"> Us</a> </li>
-
-            <li><a className="active" href="./Home">Home</a> </li>
-        </ul>
-
-    </div>
-    </>
-  )
+    <AppBar position="static" sx={{ backgroundColor: 'white', boxShadow: 'none' }}>
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Typography variant="h5" sx={{  color: 'black',fontFamily: 'Dancing Script, cursive', fontWeight: 700 }}>
+          Glaze Nail Bar
+        </Typography>
+        <Box>
+          <Button href="/Appointment" sx={{ color: 'black', fontFamily: 'Dancing Script, cursive', fontWeight: 700 }}>
+            Appoint
+          </Button>
+          <Button href="/About" sx={{ color: 'black', fontFamily: 'Dancing Script, cursive', fontWeight: 700 }}>
+            Us
+          </Button>
+          <Button href="./Home" sx={{ color: 'black', fontFamily: 'Dancing Script, cursive', fontWeight: 700 }}>
+            Home
+          </Button>
+        </Box>
+      </Toolbar>
+    </AppBar>
+  );
 }
 
-export default Navigation
+export default Navigation;

@@ -1,45 +1,110 @@
-import React, {useState} from 'react'
-import Navigation from './Navigation'
-import Footer from './Footer'
-import Pedicure from '../Services/Pedicure'
-import Manicure from '../Services/Manicure'
-
+import React, { useState } from 'react';
+import Navigation from './Navigation';
+import Footer from './Footer';
+import Pedicure from '../Services/Pedicure';
+import Manicure from '../Services/Manicure';
+import Combo from '../Services/Combo';
+import Appointmentform from '../Forms/appointmentform';
+import { Button, Container, Box, Modal } from '@mui/material';
 
 const Appointment = () => {
+  const [currentService, setCurrentService] = useState(0);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState('');
 
-  const [currentService, setCurrentService] = useState(0)
-
-  const serviceRender =(services) => {
-    switch(services){
+  const serviceRender = (services) => {
+    switch (services) {
       case 0:
-        return <Pedicure/>
+        return <Pedicure openForm={handleOpenForm} />;
       case 1:
-        return <Manicure/>
-        default:
+        return <Manicure openForm={handleOpenForm} />;
+      case 2:
+        return <Combo openForm={handleOpenForm} />;
+      default:
         break;
     }
-  }
+  };
+
+  const handleOpenForm = (service) => {
+    setSelectedService(service);
+    setIsFormOpen(true);
+  };
+
+  const handleCloseForm = () => {
+    setIsFormOpen(false);
+  };
+
+  
 
   const onButtonClick = (index) => {
-      setCurrentService(index)
-  }
+    setCurrentService(index);
+  };
+
   return (
-   <>
-   <div className='bodycontainer1'>
-    <Navigation/>
-    </div>
-    <div className='services'>
-        <button type='button' style={{backgroundColor:'pink'}} onClick={() => onButtonClick(0)} checked={currentService === 0}>Pedicure</button>
-        <button type='button' style={{backgroundColor:'pink'}} onClick={() => onButtonClick(1)} checked={currentService === 2}>Manicure</button>
-    </div>
-    <div className='bookservice'>
-        {serviceRender(currentService)}
-    </div>
+    <>
+    <Box className='bodycontainer1'>
+      <Navigation />
+    </Box>
+    <Container sx={{ textAlign: 'center', mt: 4 }}>
+      <Button
+        variant="contained"
+        sx={{
+          backgroundColor: 'pink',
+          color: 'black',
+          mb: 2,
+          '&:hover': {
+            backgroundColor: 'lightpink',
+          }
+        }}
+        onClick={() => onButtonClick(0)}
+        disabled={currentService === 0}
+      >
+        Pedicure
+      </Button>
+      <Button
+        variant="contained"
+        sx={{
+          backgroundColor: 'pink',
+          color: 'black',
+          ml: 2,
+          mb: 2,
+          '&:hover': {
+            backgroundColor: 'lightpink',
+          }
+        }}
+        onClick={() => onButtonClick(1)}
+        disabled={currentService === 1}
+      >
+        Manicure
+      </Button>
+      <Button
+        variant="contained"
+        sx={{
+          backgroundColor: 'pink',
+          color: 'black',
+          ml: 2,
+          mb: 2,
+          '&:hover': {
+            backgroundColor: 'lightpink',
+          }
+        }}
+        onClick={() => onButtonClick(2)}
+        disabled={currentService === 2}
+      >
+        Combo Service
+      </Button>
+    </Container>
+    <Box className='bookservice'>
+      {serviceRender(currentService)}
+    </Box>
+    <Modal open={isFormOpen} onClose={handleCloseForm}>
+      <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', p: 4, bgcolor: 'background.paper', boxShadow: 24 }}>
+        <Appointmentform selectedService={selectedService} />
+      </Box>
+    </Modal>
+    <Footer />
+  </>
+  );
+};
 
-    <Footer/>
-
-   </>
-  )
-}
-
-export default Appointment
+export default Appointment;
