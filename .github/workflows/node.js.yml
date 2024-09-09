@@ -23,19 +23,19 @@ jobs:
 
     # Step: Install Backend Dependencies
     - name: Install Backend Dependencies
-      working-directory: ./backend # Ensures it looks in backend folder
+      working-directory: NailAppointmentApp/backend # Ensures it looks in backend folder
       run: npm ci
 
     # Step: Install Frontend Dependencies and Build
     - name: Install Frontend Dependencies and Build
-      working-directory: ./frontend # Ensures it looks in frontend folder
+      working-directory: NailAppointmentApp/frontend # Ensures it looks in frontend folder
       run: |
         npm ci
         npm run build
 
     # Step: Move the React frontend build to the backend directory
     - name: Move Frontend Build to Backend
-      run: mv ./frontend/build ./backend/
+      run: mv NailAppointmentApp/frontend/build NailAppointmentApp/backend/
 
   deploy:
     runs-on: ubuntu-latest
