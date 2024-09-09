@@ -23,12 +23,12 @@ jobs:
 
     # Step: Install Backend Dependencies
     - name: Install Backend Dependencies
-      working-directory: ./backend
-      run: npm ci  
+      working-directory: ./backend # Ensures it looks in backend folder
+      run: npm ci
 
     # Step: Install Frontend Dependencies and Build
     - name: Install Frontend Dependencies and Build
-      working-directory: ./frontend
+      working-directory: ./frontend # Ensures it looks in frontend folder
       run: |
         npm ci
         npm run build
