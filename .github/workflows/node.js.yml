@@ -11,9 +11,10 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-       
+
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout the repository
+      uses: actions/checkout@v4
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
@@ -23,34 +24,33 @@ jobs:
 
     # Step: Install Backend Dependencies
     - name: Install Backend Dependencies
-      working-directory: NailAppointmentApp/backend # Ensures it looks in backend folder
-      run: npm ci
+      working-directory: ./backend
+      run: npm ci  # Install dependencies in backend
 
     # Step: Install Frontend Dependencies and Build
     - name: Install Frontend Dependencies and Build
-      working-directory: NailAppointmentApp/frontend # Ensures it looks in frontend folder
+      working-directory: ./frontend
       run: |
-        npm ci
-        npm run build
+        npm ci  # Install dependencies in frontend
+        npm run build  # Build the React app
 
     # Step: Move the React frontend build to the backend directory
     - name: Move Frontend Build to Backend
-      run: mv NailAppointmentApp/frontend/build NailAppointmentApp/backend/
+      run: mv ./frontend/build ./backend/
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout the repository
+      uses: actions/checkout@v4
 
-    # Step: Set up Heroku for deployment
     - name: Set up Heroku
       uses: akshatmittal/heroku-action@v1
       with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
 
-    # Step: Push to Heroku
     - name: Deploy to Heroku
       run: git push heroku master
