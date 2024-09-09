@@ -1,0 +1,50 @@
+name: Deploy to Heroku server
+
+on:
+  push:
+    branches: [ "master" ]
+  
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+       
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Install Backend Dependencies
+      working-directory: ./backend
+    - run: npm ci
+    - name: Install Frontend Dependencies
+      working-directory: ./frontend
+      run: |
+        npm ci
+        npm run build
+
+    - name: Move Frontend Build to Backend
+      run: mv ./frontend/build ./backend/
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Heroku
+      uses: akshatmittal/heroku-action@v1
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+
+    - name: Deploy to Heroku
+      run: git push heroku master
+    
