@@ -3,11 +3,9 @@ name: Deploy to Heroku server
 on:
   push:
     branches: [ "master" ]
-  
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -16,35 +14,43 @@ jobs:
        
     steps:
     - uses: actions/checkout@v4
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+
+    # Step: Install Backend Dependencies
     - name: Install Backend Dependencies
       working-directory: ./backend
-    - run: npm ci
-    - name: Install Frontend Dependencies
+      run: npm ci  
+
+    # Step: Install Frontend Dependencies and Build
+    - name: Install Frontend Dependencies and Build
       working-directory: ./frontend
       run: |
         npm ci
         npm run build
 
+    # Step: Move the React frontend build to the backend directory
     - name: Move Frontend Build to Backend
       run: mv ./frontend/build ./backend/
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
+
     steps:
     - uses: actions/checkout@v4
 
+    # Step: Set up Heroku for deployment
     - name: Set up Heroku
       uses: akshatmittal/heroku-action@v1
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
 
+    # Step: Push to Heroku
     - name: Deploy to Heroku
       run: git push heroku master
-    
