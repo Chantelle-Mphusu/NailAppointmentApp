@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material';
+import {  Button, Container, Grid, Paper, Typography } from '@mui/material';
 
 const Pedicure = ({ openForm }) => {
   return (
