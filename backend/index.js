@@ -20,8 +20,8 @@ mongoose
 
 app.use(
   cors({
-    origin: ["Access-Control-Allow-Origin","http://localhost:3000"],
-    methods: ["Access-Control-Allow-Methods","GET", "POST", "PUT", "DELETE"],
+    origin: ["http://localhost:3000","https://nail-app-khaki.vercel.app/"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
@@ -37,10 +37,10 @@ app.use(express.json());
 
 
 // Serve static files from the React frontend
-app.use(express.static(path.join(__dirname, "../frontend/build"))); // Adjust path if needed
+app.use(express.static(path.join(__dirname, "../frontend/build"))); 
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build", "index.html")); // Adjust path if needed
+  res.sendFile(path.join(__dirname, "../frontend/build", "index.html")); 
 });
 
  app.use("/", Route);
