@@ -20,7 +20,7 @@ mongoose
 
 app.use(
   cors({
-    origin: ["http://localhost:3000","https://nail-app-khaki.vercel.app/"],
+    origin: ["http://localhost:3000","https://nail-app1.vercel.app/"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
